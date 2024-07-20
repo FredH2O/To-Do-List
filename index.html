@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="To Do List Web Application" />
+    <meta name="author" content="Frederico" />
+    <meta name="keywords" content="To-Do, JavaScript, Frontend" />
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>My To-Do List</h1>
+    </header>
+
+    <main>
+      <section>
+        <form id="todo-form" method="">
+          <label for="new-task">Add a new task:</label>
+          <input
+            type="text"
+            id="new-task"
+            name="new-task"
+            placeholder="Enter a new task"
+          />
+          <button type="submit">Add</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Tasks</h2>
+        <ul id="todo-list">
+          <!-- To-do items will go here -->
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 / FredH2O</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
