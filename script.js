@@ -4,20 +4,29 @@ let newTaskInput = document.getElementById("new-task");
 
 taskForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  let toDoTask = newTaskInput.value;
+  let toDoTask = newTaskInput.value.trim();
 
   if (toDoTask) {
-    let doneBtn = document.createElement("button");
-    doneBtn.textContent = "Done";
+    toDoTask = toDoTask.charAt(0).toUpperCase() + toDoTask.slice(1);
+
+    let removeBtn = document.createElement("button");
     let liElement = document.createElement("li");
+    let taskContainer = document.createElement("div");
+
+    removeBtn.classList.add("removeBtn");
+    taskContainer.classList.add("task-container");
+
+    taskContainer.appendChild(liElement);
+    taskContainer.appendChild(removeBtn);
+    list.appendChild(taskContainer);
+
+    removeBtn.textContent = "Remove";
     liElement.textContent = toDoTask;
-    list.appendChild(liElement);
-    list.appendChild(doneBtn);
+
     newTaskInput.value = "";
 
-    doneBtn.addEventListener("click", () => {
-      liElement.remove();
-      doneBtn.remove();
+    removeBtn.addEventListener("click", () => {
+      taskContainer.remove();
     });
   }
 });
