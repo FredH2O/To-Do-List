@@ -12,21 +12,34 @@ taskForm.addEventListener("submit", (event) => {
     let removeBtn = document.createElement("button");
     let liElement = document.createElement("li");
     let taskContainer = document.createElement("div");
+    let checkBox = document.createElement("input");
 
-    removeBtn.classList.add("removeBtn");
+    checkBox.setAttribute("type", "checkbox");
+    checkBox.classList.add("check-box");
+
+    removeBtn.classList.add("remove-btn");
     taskContainer.classList.add("task-container");
 
+    taskContainer.appendChild(checkBox);
     taskContainer.appendChild(liElement);
     taskContainer.appendChild(removeBtn);
     list.appendChild(taskContainer);
 
-    removeBtn.textContent = "Remove";
+    removeBtn.textContent = "x";
     liElement.textContent = toDoTask;
 
     newTaskInput.value = "";
 
     removeBtn.addEventListener("click", () => {
       taskContainer.remove();
+    });
+
+    checkBox.addEventListener("change", function () {
+      if (checkBox.checked) {
+        liElement.style.textDecoration = "line-through";
+      } else {
+        liElement.style.textDecoration = "none";
+      }
     });
   }
 });
