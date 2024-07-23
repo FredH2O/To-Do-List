@@ -34,6 +34,30 @@ taskForm.addEventListener("submit", (event) => {
       taskContainer.remove();
     });
 
+    liElement.addEventListener("click", function () {
+      liElement.classList.add("zoomed-in");
+      liElement.classList.remove("zoomed-out");
+      liElement.setAttribute("contenteditable", "true");
+      liElement.focus();
+      liElement.style.borderBottom = "none";
+
+      liElement.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          liElement.classList.remove("zoomed-in");
+          liElement.classList.add("zoomed-out");
+          liElement.removeAttribute("contenteditable");
+          liElement.style.borderBottom = "1px solid black";
+        }
+      });
+
+      liElement.addEventListener("blur", function () {
+        liElement.classList.remove("zoomed-in");
+        liElement.classList.add("zoomed-out");
+        liElement.removeAttribute("contenteditable");
+        liElement.style.borderBottom = "1px solid black";
+      });
+    });
+
     checkBox.addEventListener("change", function () {
       if (checkBox.checked) {
         liElement.style.textDecoration = "line-through";
