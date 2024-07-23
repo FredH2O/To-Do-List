@@ -59,10 +59,32 @@ taskForm.addEventListener("submit", (event) => {
     });
 
     checkBox.addEventListener("change", function () {
+      let checkboxes = document.querySelectorAll(".check-box");
+      let allBoxChecked = true;
+
+      // let allBoxChecked = Array.from(checkboxes).every(function (box) {
+      //   return box.checked;
+      // });
+
       if (checkBox.checked) {
         liElement.style.textDecoration = "line-through";
       } else {
         liElement.style.textDecoration = "none";
+      }
+
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (!checkboxes[i].checked) {
+          allBoxChecked = false;
+          break;
+        }
+      }
+
+      if (allBoxChecked) {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+        });
       }
     });
   }
