@@ -44,11 +44,7 @@ taskForm.addEventListener("submit", (event) => {
     });
 
     liElement.addEventListener("keydown", function (event) {
-      if (
-        event.key === "Enter" &&
-        event.target.tagName === "LI" &&
-        event.target.isContentEditable
-      ) {
+      if (event.key === "Enter" && event.target.isContentEditable) {
         liElement.classList.remove("zoomed-in");
         liElement.classList.add("zoomed-out");
         liElement.removeAttribute("contenteditable");
