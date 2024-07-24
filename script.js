@@ -7,7 +7,8 @@ taskForm.addEventListener("submit", (event) => {
   let toDoTask = newTaskInput.value.trim();
 
   if (toDoTask) {
-    toDoTask = toDoTask.charAt(0).toUpperCase() + toDoTask.slice(1);
+    toDoTask =
+      toDoTask.charAt(0).toUpperCase() + toDoTask.slice(1).toLowerCase();
 
     let removeBtn = document.createElement("button");
     let liElement = document.createElement("li");
@@ -30,7 +31,7 @@ taskForm.addEventListener("submit", (event) => {
 
     newTaskInput.value = "";
 
-    removeBtn.addEventListener("click", () => {
+    removeBtn.addEventListener("click", function () {
       taskContainer.remove();
     });
 
@@ -40,31 +41,27 @@ taskForm.addEventListener("submit", (event) => {
       liElement.setAttribute("contenteditable", "true");
       liElement.focus();
       liElement.style.borderBottom = "none";
+    });
 
-      liElement.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-          liElement.classList.remove("zoomed-in");
-          liElement.classList.add("zoomed-out");
-          liElement.removeAttribute("contenteditable");
-          liElement.style.borderBottom = "1px solid black";
-        }
-      });
-
-      liElement.addEventListener("blur", function () {
+    liElement.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" && event.target.isContentEditable) {
         liElement.classList.remove("zoomed-in");
         liElement.classList.add("zoomed-out");
         liElement.removeAttribute("contenteditable");
         liElement.style.borderBottom = "1px solid black";
-      });
+      }
+    });
+
+    liElement.addEventListener("blur", function () {
+      liElement.classList.remove("zoomed-in");
+      liElement.classList.add("zoomed-out");
+      liElement.removeAttribute("contenteditable");
+      liElement.style.borderBottom = "1px solid black";
     });
 
     checkBox.addEventListener("change", function () {
       let checkboxes = document.querySelectorAll(".check-box");
       let allBoxChecked = true;
-
-      // let allBoxChecked = Array.from(checkboxes).every(function (box) {
-      //   return box.checked;
-      // });
 
       if (checkBox.checked) {
         liElement.style.textDecoration = "line-through";
