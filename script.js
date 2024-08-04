@@ -1,10 +1,12 @@
 let taskForm = document.getElementById("todo-form");
 let list = document.getElementById("todo-list");
 let newTaskInput = document.getElementById("new-task");
+let toDoTask;
 
 taskForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  let toDoTask = newTaskInput.value.trim();
+
+  toDoTask = newTaskInput.value.trim();
 
   if (toDoTask) {
     toDoTask =
@@ -83,6 +85,30 @@ taskForm.addEventListener("submit", (event) => {
           origin: { y: 0.6 },
         });
       }
+
+      updateTaskOrder();
     });
   }
 });
+
+function updateTaskOrder() {
+  var taskContainers = Array.from(document.querySelectorAll(".task-container"));
+
+  var uncheckedTasks = taskContainers.filter(function (container) {
+    return !container.querySelector(".check-box").checked;
+  });
+
+  var checkedTasks = taskContainers.filter(function (container) {
+    return container.querySelector(".check-box").checked;
+  });
+
+  list.innerHTML = "";
+
+  uncheckedTasks.forEach(function (task) {
+    list.appendChild(task);
+  });
+
+  checkedTasks.forEach(function (task) {
+    list.appendChild(task);
+  });
+}
